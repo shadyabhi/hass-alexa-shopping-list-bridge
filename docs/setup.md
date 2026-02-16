@@ -69,6 +69,8 @@ The whole process is smooth once you obtain the cookies. To obtain cookies, you 
 }
 ```
 
+<img width="944" height="817" alt="image" src="https://github.com/user-attachments/assets/ded69f69-a62c-4e0b-ab5b-7990b126147a" />
+
 - Run the following command:
 
 ```bash
