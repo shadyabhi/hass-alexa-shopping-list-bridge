@@ -4,15 +4,21 @@ The whole process is smooth once you obtain the cookies. To obtain cookies, you 
 
 ### Step 1: Addon Install (don't start!)
 
-To upload the cookies and session data for first time use, we can use this add-on to do everything in the UI.
+- Install `Samba addon` in HASS
+  - To upload the cookies and session data for first time use, we can use this addon to do everything in the UI.
+  - https://my.home-assistant.io/redirect/supervisor_addon/?addon=core_samba
+  - Once this addon is running, you can browse for local network folders, or open it in browser as:
+    - smb://<IP_ADDRESS_OF_HASS>, in my case, it was as simple as: `smb://homeassistant.local`.
 
-https://my.home-assistant.io/redirect/supervisor_addon/?addon=core_samba
+- Under `Settings -> Addons`, click on `Addons` in the left sidebar.
+  - Click on `Add` button.
+  - Click on `Install App -> Upper top right corner -> Custom Repositories`.
+  - Add the repository URL: `https://github.com/shadyabhi/amazon_shopping_list`
+  - Now, Search for `Amazon Shopping List Bridge`.
+  - Click on `Install` button.
+  - DO NOT START!
 
-Once this addon is running, you can browse for local network folders, or open it in browser as:
-
-> smb://<IP_ADDRESS_OF_HASS>
-
-### Step 2: Configure the HASS addon
+### Step 2: Configure addon
 
 - Go to the addon page in HASS UI
 - Create a new User in Home Assistant for this addon, and give it admin rights.
@@ -26,7 +32,7 @@ Once this addon is running, you can browse for local network folders, or open it
   - Home Assistant URL: https://<IP_ADDRESS_OF_HASS>
   - Home Assistant user: <HASS_USER>
   - Home Assistant password: <HASS_PASSWORD>
-- DO NOT START!
+  - DO NOT START!
 
 ### Step 3: Get cookies.json
 
