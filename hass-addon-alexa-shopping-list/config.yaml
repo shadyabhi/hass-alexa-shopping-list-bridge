@@ -1,6 +1,6 @@
 name: "Alexa Shopping List bridge"
 description: "Alexa shopping list bridge to integrate shopping lists with HASS"
-version: "0.0.1"
+version: "0.0.2"
 slug: "alexa_shopping_list_bridge"
 image: "shadyabhi/alexa-shopping-list-bridge"
 init: false
