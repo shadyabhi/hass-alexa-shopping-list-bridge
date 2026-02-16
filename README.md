@@ -68,6 +68,7 @@ Once this addon is running, you can browse for local network folders, or open it
         password: "secret_pass"
     }
 }
+```
 
 - Run the following command:
 
