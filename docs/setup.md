@@ -9,6 +9,7 @@ The whole process is smooth once you obtain the cookies. To obtain cookies, you 
   - https://my.home-assistant.io/redirect/supervisor_addon/?addon=core_samba
   - Once this addon is running, you can browse for local network folders, or open it in browser as:
     - smb://<IP_ADDRESS_OF_HASS>, in my case, it was as simple as: `smb://homeassistant.local`.
+- Start the addon, enable a password so its not available to local network without a password.
 
 - Add `Local To-do` integration in HASS: https://www.home-assistant.io/integrations/local_todo/
 
@@ -19,6 +20,8 @@ The whole process is smooth once you obtain the cookies. To obtain cookies, you 
   - Now, Search for `Amazon Shopping List Bridge`.
   - Click on `Install` button.
   - DO NOT START!
+
+<img width="783" height="313" alt="image" src="https://github.com/user-attachments/assets/6845dfdb-b219-4632-841e-2ee9fe7f2fb2" />
 
 ### Step 2: Configure addon
 
@@ -35,6 +38,9 @@ The whole process is smooth once you obtain the cookies. To obtain cookies, you 
   - Home Assistant user: <HASS_USER>
   - Home Assistant password: <HASS_PASSWORD>
   - DO NOT START!
+ 
+<img width="1081" height="1134" alt="image" src="https://github.com/user-attachments/assets/376e4a51-e801-4f84-98e5-6d683c980626" />
+
 
 ### Step 3: Get cookies.json
 
