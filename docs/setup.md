@@ -10,6 +10,8 @@ The whole process is smooth once you obtain the cookies. To obtain cookies, you 
   - Once this addon is running, you can browse for local network folders, or open it in browser as:
     - smb://<IP_ADDRESS_OF_HASS>, in my case, it was as simple as: `smb://homeassistant.local`.
 
+- Add `Local To-do` integration in HASS: https://www.home-assistant.io/integrations/local_todo/
+
 - Under `Settings -> Addons`, click on `Addons` in the left sidebar.
   - Click on `Add` button.
   - Click on `Install App -> Upper top right corner -> Custom Repositories`.
