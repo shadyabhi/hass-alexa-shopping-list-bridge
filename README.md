@@ -99,8 +99,3 @@ APP_HEADLESS_ONLY=false node main.js
 # Development
 
 See [DEV.md](DEV.md) for development notes.
-
-# TODO
-
-- [ ] Publish the addon to Home Assistant Addon Store: https://developers.home-assistant.io/docs/apps/tutorial
-- [ ] Optimize APIs to HASS, reuse token
