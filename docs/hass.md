@@ -81,8 +81,8 @@ description: ""
 triggers:
   - trigger: state
     entity_id:
-      - sensor.home_abhijeet_distance
-      - sensor.home_mansi_distance
+      - sensor.home_name1_distance
+      - sensor.home_name2_distance
 conditions:
   - condition: or
     conditions:
