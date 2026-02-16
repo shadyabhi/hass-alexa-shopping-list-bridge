@@ -87,10 +87,10 @@ conditions:
   - condition: or
     conditions:
       - condition: numeric_state
-        entity_id: sensor.home_abhijeet_distance
+        entity_id: sensor.home_name1_distance
         above: 1000
       - condition: numeric_state
-        entity_id: sensor.home_mansi_distance
+        entity_id: sensor.home_name2_distance
         above: 1000
   - condition: template
     value_template: >-
