@@ -18,6 +18,8 @@ This is done by using the following technologies:
 
 ## Setup
 
+The whole process is smooth once you obtain the cookies. To obtain cookies, you need to do the first-run manually on your laptop, then copy over the cookies to the HASS addon.
+
 ### Step 1: Addon Install (don't start!)
 
 To upload the cookies and session data for first time use, we can use this add-on to do everything in the UI.
@@ -52,7 +54,8 @@ Once this addon is running, you can browse for local network folders, or open it
 >
 > I plan to improve this workflow in a future release.
 
-- Install playright.
+- Install playright, follow official documentation. https://playwright.dev/docs/intro#installing-playwright
+- Clone this repository locally.
 - Create a local config file, `config.hjson`
 
 ```hjson
@@ -73,12 +76,14 @@ Once this addon is running, you can browse for local network folders, or open it
 - Run the following command:
 
 ```bash
+# Syncs all dependencies
 npm ci
-node main.js
+
+# headless mode can't perform browser login, so user can enter username/password
+APP_HEADLESS_ONLY=false node main.js
+
+# Once the above command is done, it will save the cookies to `data/session_config.json`.
 ```
-
-This will open a browser window, and you will need to login to Amazon. Once logged in, the script will close the browser and save the cookies to `data/session_config.json`.
-
 - Copy the `data/session_config.json` to the HASS addon folder `data/session_config.json`.
   - Open Samba share at: `smb://<IP_ADDRESS_OF_HASS>`, for me, its as easy as: `smb://homeassistant.local`
   - Open folder `addons_configs`
