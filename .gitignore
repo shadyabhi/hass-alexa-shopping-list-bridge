@@ -1,0 +1,8 @@
+# Node modules
+node_modules
+
+# Sensitive personal data
+data
+
+# Config file
+config.hjson
