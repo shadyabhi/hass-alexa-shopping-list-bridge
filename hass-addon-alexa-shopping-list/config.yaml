@@ -16,6 +16,7 @@ environment:
 options:
   app:
     data_dir: "/config"
+    log_level: "info"
   amazon:
     domain: "www.amazon.com"
   hass:
@@ -25,6 +26,7 @@ options:
 schema:
   app:
     data_dir: str
+    log_level: list(debug|info|warn|error)
   amazon:
     domain: str
   hass:

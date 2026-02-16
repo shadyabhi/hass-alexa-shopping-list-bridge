@@ -7,6 +7,7 @@ const configSchema = Joi.object({
     app: Joi.object({
         headless_only: Joi.boolean().default(true),
         data_dir: Joi.string().default('./data'),
+        log_level: Joi.string().valid('debug', 'info', 'warn', 'error').default('debug'),
     }).default(),
     amazon: Joi.object({
         domain: Joi.string()
