@@ -10,6 +10,9 @@ This is done by using the following technologies:
 - Playwright-stealth: For stealth mode, with some overrides wherever needed
 - Home Assistant API: Allows the add-on to push updates to Home Assistant.
 
+<img width="1343" height="690" alt="image" src="https://github.com/user-attachments/assets/fe3d9be8-771d-4423-8493-53b4f7c59a2f" />
+
+
 ## Features
 
 - Syncs shopping list from Amazon to Home Assistant
