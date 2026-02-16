@@ -55,7 +55,7 @@ Once this addon is running, you can browse for local network folders, or open it
 - Install playright.
 - Create a local config file, `config.hjson`
 
-```json
+```hjson
 {
     # Home Assistant configuration
     hass: {
