@@ -247,7 +247,7 @@ class HomeAssistantClient {
 
         const weekdayItemsCount = amazonItems.filter(item => item.value.toLowerCase().includes('weekday')).length;
         const weekendItemsCount = amazonItems.filter(item => item.value.toLowerCase().includes('weekend')).length;
-        logger.debug(`Complete for ${entityId}. Total: ${amazonItems.length} (Weekday: ${weekdayItemsCount}, Weekend: ${weekendItemsCount})`);
+        logger.debug(`Sync completed for ${entityId}. Total: ${amazonItems.length} (Weekday: ${weekdayItemsCount}, Weekend: ${weekendItemsCount})`);
     }
 
     async _syncAddedOrUpdatedItems(entityId, amazonItems, itemsByAmazonId) {

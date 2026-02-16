@@ -123,8 +123,6 @@ class ShoppingList {
                 logger.error(`Failed to sync list ${haListName}:`, error.message);
             }
         }
-
-        logger.debug('Sync completed.');
     }
 
     async _logResponseDetails(response) {
