@@ -33,6 +33,12 @@ if [[ ! $REPLY =~ ^[Yy]$ ]]; then
     exit 1
 fi
 
+# Update version in config.yaml
+CONFIG_FILE="hass-addon-alexa-shopping-list/config.yaml"
+echo "Updating version in $CONFIG_FILE to $NEXT_VERSION"
+sed -i.tmp "s/^version: \".*\"/version: \"$NEXT_VERSION\"/" "$CONFIG_FILE"
+rm -f "${CONFIG_FILE}.tmp"
+
 # Run make bp
 echo "Running make bp VERSION=$NEXT_VERSION"
 make bp VERSION=$NEXT_VERSION
