@@ -42,3 +42,8 @@ rm -f "${CONFIG_FILE}.tmp"
 # Run make bp
 echo "Running make bp VERSION=$NEXT_VERSION"
 make bp VERSION=$NEXT_VERSION
+
+# Create git tag
+echo "Creating git tag v$NEXT_VERSION"
+git tag "v$NEXT_VERSION"
+git push origin "v$NEXT_VERSION"

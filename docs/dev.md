@@ -5,6 +5,9 @@ Image is available at: https://hub.docker.com/repositories/shadyabhi
 ### Publish
 
 ```bash
+# Update @CHANGELOG.md
+
+
 # Build and push
 make publish
 ```
