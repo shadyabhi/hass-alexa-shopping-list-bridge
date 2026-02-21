@@ -48,7 +48,7 @@ class ShoppingList {
                 try {
                     const responseBodyText = await response.text();
                     const data = JSON.parse(responseBodyText);
-                    logger.info('Received shopping list data from intercepted request.');
+                    logger.info(`Received shopping list data from intercepted request: ${url}`);
 
                     if (callback) {
                         await callback(data);
@@ -61,8 +61,9 @@ class ShoppingList {
 
         // Navigate to the shopping list page
         try {
-            logger.info('Navigating to Shopping List page...');
-            await page.goto(`https://${this.browserState.domain}/gp/alexa-shopping-list`, {
+            const navUrl = `https://${this.browserState.domain}/gp/alexa-shopping-list`;
+            logger.info(`Navigating to Shopping List page: ${navUrl}`);
+            await page.goto(navUrl, {
                 waitUntil: 'networkidle'
             });
         } catch (e) {

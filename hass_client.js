@@ -297,7 +297,7 @@ class HomeAssistantClient {
                 weekend_items_count: weekendItemsCount
             }
         });
-        logger.info(`Attributes update complete (Weekday: ${weekdayItemsCount}, Weekend: ${weekendItemsCount})`);
+        logger.info(`Attributes update complete for ${entityId} (Weekday: ${weekdayItemsCount}, Weekend: ${weekendItemsCount})`);
     }
 
     /**
