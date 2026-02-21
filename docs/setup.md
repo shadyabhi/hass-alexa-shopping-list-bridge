@@ -38,7 +38,7 @@ The whole process is smooth once you obtain the cookies. To obtain cookies, you 
   - Home Assistant user: <HASS_USER>
   - Home Assistant password: <HASS_PASSWORD>
   - DO NOT START!
- 
+
 <img width="1081" height="1134" alt="image" src="https://github.com/user-attachments/assets/376e4a51-e801-4f84-98e5-6d683c980626" />
 
 

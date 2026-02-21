@@ -216,33 +216,11 @@ class HomeAssistantClient {
             }
         }
 
-        // Log summary stats
-        const amazonItemIds = new Set(amazonItems.map(i => i.id));
-        let toDelete = 0;
-        for (const item of currentItems) {
-            if (item.description && !amazonItemIds.has(item.description)) {
-                toDelete++;
-            }
-        }
+        const { added, updated } = await this._syncAddedOrUpdatedItems(entityId, amazonItems, itemsByAmazonId);
+        const deleted = await this._syncDeletedItems(entityId, amazonItems, currentItems);
 
-        let toAdd = 0;
-        let toUpdate = 0;
-        for (const amzItem of amazonItems) {
-            const existing = itemsByAmazonId.get(amzItem.id);
-            if (!existing) {
-                toAdd++;
-            } else {
-                const haStatus = existing.status;
-                const amzStatus = amzItem.completed ? 'completed' : 'needs_action';
-                if (haStatus !== amzStatus) {
-                    toUpdate++;
-                }
-            }
-        }
-        logger.info(`Sync Plan for ${entityId}: Add=${toAdd}, Update=${toUpdate}, Delete=${toDelete}`);
+        logger.info(`Synced ${entityId}: Add=${added}, Update=${updated}, Delete=${deleted}`);
 
-        await this._syncAddedOrUpdatedItems(entityId, amazonItems, itemsByAmazonId);
-        await this._syncDeletedItems(entityId, amazonItems, currentItems);
         await this._updateListAttributes(entityId, amazonItems);
 
         const weekdayItemsCount = amazonItems.filter(item => item.value.toLowerCase().includes('weekday')).length;
@@ -251,32 +229,40 @@ class HomeAssistantClient {
     }
 
     async _syncAddedOrUpdatedItems(entityId, amazonItems, itemsByAmazonId) {
+        let added = 0;
+        let updated = 0;
         for (const amzItem of amazonItems) {
             const existing = itemsByAmazonId.get(amzItem.id);
 
             if (!existing) {
                 logger.info(`Sync: Added ${amzItem.value} (ID: ${amzItem.id})`);
                 await this.addItem(entityId, amzItem.value, amzItem.id);
+                added++;
             } else {
                 const haStatus = existing.status;
                 const amzStatus = amzItem.completed ? 'completed' : 'needs_action';
                 if (haStatus !== amzStatus) {
                     logger.info(`Sync: Updated ${amzItem.value} (Status: ${haStatus} -> ${amzStatus})`);
                     await this.updateItem(entityId, existing.summary, amzStatus);
+                    updated++;
                 }
             }
         }
+        return { added, updated };
     }
 
     async _syncDeletedItems(entityId, amazonItems, currentItems) {
+        let deleted = 0;
         const amazonItemIds = new Set(amazonItems.map(i => i.id));
         for (const item of currentItems) {
             // Only check items that have an Amazon ID in description (managed by this script)
             if (item.description && !amazonItemIds.has(item.description)) {
                 logger.info(`Sync: Deleted ${item.summary} (ID: ${item.description})`);
                 await this.deleteItem(entityId, item.summary);
+                deleted++;
             }
         }
+        return deleted;
     }
 
     async _updateListAttributes(entityId, amazonItems) {
