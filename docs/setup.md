@@ -1,11 +1,11 @@
 # Setup
 
-The whole process is smooth once you obtain the cookies. To obtain cookies, you need to do the first-run manually on your laptop, then copy over the cookies to the HASS addon.
+The whole process is smooth once you obtain the session state. To obtain the session state, you need to do the first-run manually on your laptop, then copy over the session config files to the HASS addon.
 
 ### Step 1: Addon Install (don't start!)
 
 - Install `Samba addon` in HASS
-  - To upload the cookies and session data for first time use, we can use this addon to do everything in the UI.
+  - To upload the session state data for first time use, we can use this addon to do everything in the UI.
   - https://my.home-assistant.io/redirect/supervisor_addon/?addon=core_samba
   - Once this addon is running, you can browse for local network folders, or open it in browser as:
     - smb://<IP_ADDRESS_OF_HASS>, in my case, it was as simple as: `smb://homeassistant.local`.
@@ -42,11 +42,11 @@ The whole process is smooth once you obtain the cookies. To obtain cookies, you 
 <img width="1081" height="1134" alt="image" src="https://github.com/user-attachments/assets/376e4a51-e801-4f84-98e5-6d683c980626" />
 
 
-### Step 3: Get cookies.json
+### Step 3: Get your Session Config Files
 
 > Warning!
 >
-> This is the hardest part. We need a local installation of Playright on our laptop/desktop to get the cookies for the first time.
+> This is the hardest part. We need a local installation of Playright on our laptop/desktop to get the session config files for the first time.
 >
 > I plan to improve this workflow in a future release.
 
@@ -80,13 +80,13 @@ npm ci
 # headless mode can't perform browser login, so user can enter username/password
 APP_HEADLESS_ONLY=false node main.js
 
-# Once the above command is done, it will save the cookies to `data/session_config.json`.
+# Once the above command is done, it will save the session config states to `data/session_config.json` and `data/session_config_user.json`.
 ```
-- Copy the `data/session_config.json` to the HASS addon folder `data/session_config.json`.
+- Copy the local `data/session_config.json` and `data/session_config_user.json` to the addon config folder.
   - Open Samba share at: `smb://<IP_ADDRESS_OF_HASS>`, for me, its as easy as: `smb://homeassistant.local`
   - Open folder `addons_configs`
   - Locate the addon folder inside it.
-  - Copy the local `data/session_config.json` to the addon config folder `session_config.json`.
+  - Copy the local `data/session_config.json` and `data/session_config_user.json` to the addon config folder.
 
 ### Step 4: Start the addon
 

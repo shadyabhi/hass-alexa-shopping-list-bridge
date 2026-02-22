@@ -16,7 +16,7 @@ class ShoppingList {
     }
 
     preflight() {
-        // Simple check: if headless_only is true and no cookies exist, we can't properly start.
+        // Simple check: if headless_only is true and no session exists, we can't properly start.
         // However, getAuthenticatedPage() also checks this, so we could technically remove this
         // or just keep it as an early fail.
         if (config.app.headless_only && !fs.existsSync(this.browserState.sessionConfigPath)) {
@@ -31,6 +31,20 @@ class ShoppingList {
         try {
             page = await this.browserState.getAuthenticatedPage();
         } catch (e) {
+            if (e.message.includes('No user-agent found') && !config.app.headless_only) {
+                logger.warn('User session invalid or missing. Forcing re-authentication to capture new session state...');
+
+                // Delete stale session to trigger login on next attempt
+                if (fs.existsSync(this.browserState.sessionConfigPath)) {
+                    fs.unlinkSync(this.browserState.sessionConfigPath);
+                }
+                if (fs.existsSync(this.browserState.sessionUserConfigPath)) {
+                    fs.unlinkSync(this.browserState.sessionUserConfigPath);
+                }
+
+                return this.browserStart(callback);
+            }
+
             logger.error(`Failed to initialize browser: ${e.message}`);
             throw e;
         }
@@ -53,6 +67,9 @@ class ShoppingList {
                     if (callback) {
                         await callback(data);
                     }
+
+                    // Save the session state after each successful sync to keep cookies fresh
+                    await this.browserState.storeState(page);
                 } catch (err) {
                     logger.error('Error parsing shopping list response:', err);
                 }
@@ -70,11 +87,11 @@ class ShoppingList {
             logger.error('Error navigating to shopping list page:', e);
         }
 
-        // Check if we were redirected to login (session expired despite cookie file existing)
+        // Check if we were redirected to login (session expired despite session file existing)
         if (page.url().includes('signin')) {
             logger.info('Session expired (redirected to signin).');
             if (config.app.headless_only) {
-                throw new Error('Cookies expired. headless_only is enabled — cannot initiate login flow.');
+                throw new Error('Session expired. headless_only is enabled — cannot initiate login flow.');
             }
 
             logger.info('Restarting browser in headful mode for login...');
@@ -84,8 +101,11 @@ class ShoppingList {
             if (fs.existsSync(this.browserState.sessionConfigPath)) {
                 fs.unlinkSync(this.browserState.sessionConfigPath);
             }
+            if (fs.existsSync(this.browserState.sessionUserConfigPath)) {
+                fs.unlinkSync(this.browserState.sessionUserConfigPath);
+            }
 
-            // Recursive retry (now that cookies are gone, it will trigger login)
+            // Recursive retry (now that session is gone, it will trigger login)
             return this.browserStart(callback);
         }
 

@@ -16,7 +16,7 @@ This is done by using the following technologies:
 
 - Syncs shopping list from Amazon to Home Assistant
 - All configuration is done in UI.
-- Initial setup is needed for first-time login, or when Amazon invalides the cookies.
+- Initial setup is needed for first-time login, or when Amazon invalidates the session state.
 
 ## Setup
 
